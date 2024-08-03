@@ -53,17 +53,28 @@
             cursor: pointer;
         }
         .image-container {
-            background-image: url('/mnt/data/image.png'); /* Image URL */
             background-size: cover;
             background-position: center;
             position: relative;
         }
-        .image-container .overlay {
+        .image-container.left img {
+            opacity: 1; /* Fully opaque */
+            border-radius: 15px; /* Rounded corners */
+        }
+        .image-container.right img {
+            opacity: 0.5; /* Semi-transparent */
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .overlay {
             position: absolute;
             top: 10%;
             left: 10%;
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 1rem;
+            padding: 4rem;
             border-radius: 4px;
             color: #ffffff;
         }
@@ -89,6 +100,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="image-container left">
+            <img src="images/login-signup.jpeg" alt="Left Image"> <!-- Image URL for the left image -->
+        </div>
         <div class="form-container">
             <div>
                 <h1>Here where your trip starts...</h1>
@@ -101,12 +115,6 @@
                     <button type="submit">Start</button>
                 </form>
                 <p>Already have an account? <a href="#">Log in</a></p>
-            </div>
-        </div>
-        <div class="image-container">
-            <div class="overlay">
-                <p>Gringo Trail</p>
-                <p>1.2 km left to your accommodation</p>
             </div>
         </div>
     </div>
