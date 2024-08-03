@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>Voyager - Start Your Perfect Trip</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        .form-container, .image-container {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .form-container form input {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-container form button {
+            padding: 0.5rem;
+            background-color: #2d6a4f;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .image-container {
+            background-image: url('/mnt/data/image.png'); /* Image URL */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .image-container .overlay {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 4px;
+            color: #ffffff;
+        }
+    </style>
+    <!-- Include the Google Platform Library -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div>
+                <h1>Here where your trip starts...</h1>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <a href="#" onclick="signOut();">Sign out</a>
+                <form action="#">
+                    <input type="text" placeholder="Full name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Start</button>
+                </form>
+                <p>Already have an account? <a href="#">Log in</a></p>
+            </div>
+        </div>
+        <div class="image-container">
+            <div class="overlay">
+                <p>Gringo Trail</p>
+                <p>1.2 km left to your accommodation</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
